@@ -13,23 +13,21 @@ def generateBarcode(provider: object, filename: str, serial: str) -> str:
 
 if __name__ == '__main__':
 	print(barcode.PROVIDED_BARCODES)
-	filename = str(datetime.timestamp(datetime.now()))
-	EXPONENTIAL = 13;
 	# x^n-1...((x^n) - 1))
+	EXPONENTIAL = 13;
 	serialNumber = str(randint(10**(EXPONENTIAL - 1), (10**EXPONENTIAL) - 1))
-	EAN = barcode.get_barcode_class('ean13')
+	filename = str(datetime.timestamp(datetime.now()))
+	barcodeProvider = 'ean13'
+	EAN = barcode.get_barcode_class(barcodeProvider)
 	generateBarcode(EAN, filename, serialNumber)
 
-	# generate svg
-	# ean = EAN(serialNumber)
-	# fullname = ean.save(filename)
+	""" default generate with svg in v.0.10
+	EAN = barcode.get_barcode_class(barcodeProvider)
+	ean = EAN(serialNumber)
+	fullname = ean.save(filename)
+	"""
 
-	# generate png
-	# ean = EAN(serialNumber, writer=ImageWriter())
-	# fullname = ean.save('ean13_barcode') v0.10
-	# v0.4
-	# f = open(filename + '.png', 'wb')
-	# ean.write(f)
-	# version 0.5
-	# name = generate('EAN13', '5901234123457', output='barcode_svg')
-	# generate('EAN13', '5901234123457', writer=ImageWriter(), output='barcode')
+	"""Or generate with png in v 0.4
+		name = generate('EAN13', '5901234123457', output='barcode_svg')
+		generate('EAN13', '5901234123457', writer=ImageWriter(), output='barcode')
+	"""
